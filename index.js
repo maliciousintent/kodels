@@ -19,6 +19,10 @@ ModelInstance.prototype.toString = function() {
   return this.toObject().toString();
 };
 
+ModelInstance.prototype.toJSON = function() {
+  return this.toObject();
+};
+
 ModelInstance.prototype.inspect = ModelInstance.prototype.toObject = function() {
   return this.$attributeValues;
 };

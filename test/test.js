@@ -212,7 +212,19 @@ test('mongodb driver', function (t) {
           }, function (err) { next(err); });
         },
         
-        
+        function toJSON(next) {
+          EventModel.find().then(function (events) {
+            
+            try {
+              var str = JSON.stringify(events);
+              tt.ok(str, 'strigify object without errors');
+              next();
+            } catch (err) {
+              next(err); 
+            }
+          }, function (err) { next(err); });
+        },
+
         function findAllWithSortLimitSkip(next) {
           EventModel.find({}, {}, { title: 1 }, 1, 1).then(function (events) {
             tt.equals(events.length, 1, 'find all events if no query is provided');
